@@ -1,0 +1,95 @@
+// determinante.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+
+using namespace std;
+void cargar_matriz(int A[MAX][MAX], int fil, int col);
+void mostrar_matriz(int A[MAX][MAX], int fil, int col);
+void multiplicacion_matrices(int A[MAX][MAX], int B[MAX][MAX],int fil,int col, int fil1, int col1);
+
+void main()
+{	int fil,col,A[MAX][MAX], B[MAX][MAX], C[MAX][MAX],fil1,col1;
+	do{
+		cout<<"ingrese el numero de filas para la matriz A"<<endl;
+		cin>>fil;
+	}while((fil<=0)||(fil>10));
+	do{
+		cout<<"ingrese el numero de columnas para la matriz A"<<endl;
+		cin>>col;
+	}while((col<=0)||(col>10));
+
+	cout<<"ingrese la matriz A"<<endl;
+	cargar_matriz(A,fil,col);
+	cout<<endl;
+	cout<<"  MATRIZ A"<<endl;
+	mostrar_matriz(A,fil,col);
+	cout<<endl;
+	do{
+		cout<<"ingrese el numero de filas para la matriz B"<<endl;
+		cin>>fil1;
+	}while((fil1<=0)||(fil1>10));
+	do{
+		cout<<"ingrese el numero de columnas para la matriz B"<<endl;
+		cin>>col1;
+	}while((col1<=0)||(col1>10));
+	cout<<"ingrese la matriz B"<<endl;
+	cargar_matriz(B,fil1,col1);
+	cout<<endl;
+	cout<<"  MATRIZ B"<<endl;
+	mostrar_matriz(B,fil1,col1);
+	cout<<endl;
+	cout<<"  MATRIZ A*B"<<endl;
+	multiplicacion_matrices(A, B, fil, col, fil1, col1);
+	getch();
+
+}
+
+void cargar_matriz(int A[MAX][MAX], int fil, int col)
+{	
+	int i,j;
+	for(i=0;i<fil;i++)
+		for(j=0;j<col;j++)
+			{cout<<"ingrese ["<<i<<"]["<<j<<"]=";
+			cin>>A[i][j];
+			}
+
+}
+void mostrar_matriz(int A[MAX][MAX], int fil, int col)
+{	
+	int i,j;
+	for(i=0;i<fil;i++)
+		{for(j=0;j<col;j++)
+			{
+			cout<<A[i][j]<<"\t";
+			}
+		cout<<endl;
+		}
+}
+
+void multiplicacion_matrices(int A[MAX][MAX], int B[MAX][MAX],int fil,int col, int fil1, int col1)
+{
+	int C[MAX][MAX],i,j,filC,colC,k,x;
+	if(col==fil1)
+		{filC=fil;
+		colC=col1;
+		x=col=fil1;
+		for(i=0;i<filC;i++)
+			for(j=0;j<colC;j++)
+			{	C[i][j]=0;
+				for(k=0;k<x;k++)
+				C[i][j]=C[i][j]+(A[i][k]*B[k][j]);
+			}
+		}
+	else
+		cout<<"ERROR---no se puede realizar la operacion"<<endl;
+
+	for(i=0;i<filC;i++)
+		{for(j=0;j<colC;j++)
+			{cout<<C[i][j]<<"\t";}
+		cout<<endl;
+		}	
+}
