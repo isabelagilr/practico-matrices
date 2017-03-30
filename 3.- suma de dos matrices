@@ -1,0 +1,78 @@
+// determinante.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+
+using namespace std;
+void cargar_matriz(int A[MAX][MAX], int fil, int col);
+void mostrar_matriz(int A[MAX][MAX], int fil, int col);
+void suma_matrices(int A[MAX][MAX], int B[MAX][MAX],int fil,int col);
+
+void main()
+{	int fil,col,A[MAX][MAX], B[MAX][MAX], C[MAX][MAX];
+	do{
+		cout<<"ingrese el numero de filas para las matrices"<<endl;
+		cin>>fil;
+	}while((fil<=0)||(fil>10));
+	do{
+		cout<<"ingrese el numero de columnas para las matices"<<endl;
+		cin>>col;
+	}while((col<=0)||(col>10));
+
+	cout<<"ingrese la matriz A"<<endl;
+	cargar_matriz(A,fil,col);
+	cout<<endl;
+	cout<<"  MATRIZ A"<<endl;
+	mostrar_matriz(A,fil,col);
+	cout<<endl;
+	cout<<"ingrese la matriz B"<<endl;
+	cargar_matriz(B,fil,col);
+	cout<<endl;
+	cout<<"  MATRIZ B"<<endl;
+	mostrar_matriz(B,fil,col);
+	cout<<endl;
+	cout<<"MATRIZ A+B"<<endl;
+	suma_matrices(A,B,fil,col);
+	getch();
+
+}
+
+void cargar_matriz(int A[MAX][MAX], int fil, int col)
+{	
+	int i,j;
+	for(i=0;i<fil;i++)
+		for(j=0;j<col;j++)
+			{cout<<"ingrese ["<<i<<"]["<<j<<"]=";
+			cin>>A[i][j];
+			}
+
+}
+void mostrar_matriz(int A[MAX][MAX], int fil, int col)
+{	
+	int i,j;
+	for(i=0;i<fil;i++)
+		{for(j=0;j<col;j++)
+			{
+			cout<<A[i][j]<<"\t";
+			}
+		cout<<endl;
+		}
+}
+
+void suma_matrices(int A[MAX][MAX], int B[MAX][MAX],int fil,int col)
+{
+	int C[MAX][MAX],i,j;
+	for(i=0;i<fil;i++)
+		for(j=0;j<col;j++)
+			C[i][j]=A[i][j]+B[i][j];
+
+	for(i=0;i<fil;i++)
+		{for(j=0;j<col;j++)
+			cout<<C[i][j]<<"\t";
+		cout<<endl;
+		}
+
+}
