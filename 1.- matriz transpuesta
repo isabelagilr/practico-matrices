@@ -1,0 +1,51 @@
+// matriz transpuesta.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "conio.h"
+#define MAX 20
+
+using namespace std;
+
+void cargar_mostrar_matriz(int fil, int col, int A[MAX][MAX]);
+void transpuesta(int fil, int col, int A[MAX][MAX]);
+
+void main()
+{	int fil, col, A[MAX][MAX];
+	do{
+	cout<<"ingrese el numero de Filas"<<endl;
+	cin>>fil;
+	}while((fil<=0)||(fil>MAX));
+	do{
+	cout<<"ingrese el numero de Columnas"<<endl;
+	cin>>col;
+	}while((col<=0)||(col>MAX));
+	 cargar_mostrar_matriz(fil,col,A);
+	 transpuesta(fil,col,A);
+getch();
+}
+
+void cargar_mostrar_matriz(int fil, int col, int A[MAX][MAX])
+{	cout<<"MATRIZ ORIGINAL"<<endl;
+	cout<<endl;
+	for(int i=0;i<fil;i++)
+		for(int j=0;j<col;j++)
+		{	
+			cout<<"A["<<i<<"]["<<j<<"]=";
+			cin>>A[i][j];
+		}
+}
+void transpuesta(int fil, int col, int A[MAX][MAX])
+{	int i,j,col1,fil1;
+	fil1=col;
+	col1=fil;
+	cout<<endl;
+	cout<<"MATRIZ TRANSPUESTA"<<endl;
+	cout<<endl;
+	for(i=0;i<fil1;i++)
+		for(j=0;j<col1;j++)
+			cout<<"A["<<i<<"]["<<j<<"]="<<A[j][i]<<endl;
+	
+}
