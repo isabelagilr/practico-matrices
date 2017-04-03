@@ -1,0 +1,56 @@
+// cargar una matriz cuadrada por diagonales.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+
+using namespace std;
+void cargardiagonal(int M[MAX][MAX], int orden);
+
+void main()
+{
+	int orden, M[MAX][MAX];
+	cout<<"ingrese el orden de su matriz"<<endl;
+	cin>>orden;
+	cargardiagonal(M, orden);
+
+getch();
+
+}
+
+void cargardiagonal(int M[MAX][MAX], int orden)
+{	
+	int f,c,d,i;
+	f=0;
+	c=0;
+	d=1;
+	while(f<orden)
+	{
+		for(i=f;i>=0;i--)
+		{
+			M[i][c]=d;
+			cout<<"M["<<i<<"]["<<c<<"]="<<M[i][c]<<endl;
+			d++;
+			c++;
+		}
+		f++;
+		c=0;
+	}
+	c++;
+	f=orden-1;
+
+	while(c<orden)
+	{
+		for(i=c;i<orden;i++)
+		{
+			M[f][i]=d;
+			cout<<"M["<<f<<"]["<<i<<"]="<<M[f][i]<<endl;
+			d++;
+			f--;
+		}
+		f=orden-1;
+		c++;
+	}
+}
