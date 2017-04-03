@@ -1,0 +1,110 @@
+// matrizmagica.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 20
+
+using namespace std;
+
+void cargarmatriz(int A[MAX][MAX], int orden);
+void mostrarmatriz(int A[MAX][MAX], int orden);
+void verificar_magica(int A[MAX][MAX], int orden);
+
+
+void main()
+{
+	int A[MAX][MAX], orden;
+
+	do{
+	cout<<"ingresar el orden de la matriz"<<endl;
+	cin>>orden;
+	}while((orden<=0)||(orden>MAX));
+	cargarmatriz(A,orden);
+	cout<<endl;
+	mostrarmatriz(A,orden);
+	cout<<endl;
+	verificar_magica(A,orden);
+	getch();
+}
+
+void cargarmatriz(int A[MAX][MAX], int orden)
+{
+	for(int i=0;i<orden;i++)
+	{	for(int j=0;j<orden;j++)
+		{	
+			cout<<"A["<<i<<"]["<<j<<"]="<<endl;
+			cin>>A[i][j];
+		}
+	}
+}
+void mostrarmatriz(int A[MAX][MAX], int orden)
+{
+	for(int i=0;i<orden;i++)
+	{	for(int j=0;j<orden;j++)
+		{	
+			cout<<A[i][j]<<"\t";
+		}
+		cout<<endl;
+	}
+}
+
+void verificar_magica(int A[MAX][MAX], int orden)
+{	
+	int i,j,vec[1000],tamv,aux,k;
+	tamv=0;
+	aux=0;
+
+	for(i=0;i<orden;i++)
+	{	for(j=0;j<orden;j++)
+		{
+			aux=aux+A[i][j];
+		}
+		vec[tamv]=aux;
+		tamv++;
+		aux=0;
+	}
+
+	for(i=0;i<orden;i++)
+	{	for(j=0;j<orden;j++)
+		{
+			aux=aux+A[j][i];
+		}
+		vec[tamv]=aux;
+		tamv++;
+		aux=0;
+	}
+
+	for(i=0;i<orden;i++)
+	{
+		aux=aux+A[i][i];
+	}
+	vec[tamv]=aux;
+	tamv++;
+	aux=0;
+
+	for(i=0;i<orden;i++)
+	{	for(j=0;j<orden;j++)
+		{
+			if((i+j)==(orden-1))
+				{
+				aux=aux+A[i][j];
+				}
+		}	
+	}
+	vec[tamv]=aux;
+	tamv++;
+	aux=0;
+	k=1;
+	for(i=0;i+1<tamv;i++)
+	{
+		if(vec[i]!=vec[i+1])
+			k=0;
+	}
+	if(k==1)
+		cout<<"ES UNA MATRIZ MAGICA"<<endl;
+	else
+		cout<<"NO ES UNA MATRIZ MAGICA"<<endl;
+	
+}
