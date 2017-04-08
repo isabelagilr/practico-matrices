@@ -1,0 +1,343 @@
+// matriz magica.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+
+using namespace std;
+
+void cargar(int A[MAX][MAX], int fil, int col);
+void mostrar(int A[MAX][MAX], int fil, int col);
+void transpuesta(int A[MAX][MAX], int fil, int col);
+void suma(int A[MAX][MAX],int B[MAX][MAX],int fil, int col,int fil2, int col2);
+void multiplicacion(int A[MAX][MAX],int B[MAX][MAX],int fil, int col,int fil2, int col2);
+void magica(int A[MAX][MAX], int fil, int col);
+
+using namespace std;
+
+void main()
+{
+	int op;
+	do{
+		cout<<"           MENU   "<<endl;
+		cout<<"(1)matriz transpuesta"<<endl;
+		cout<<"(2)suma de dos matrices (el resultado en una tercera)"<<endl;
+		cout<<"(3)multiplicacion de dos matrices (el resultado en una tercera)"<<endl;
+		cout<<"(4)verificar si una matriz es magica"<<endl;
+		cout<<"(5)cargar una matriz cuadrada en forma circular (con naturales)"<<endl;
+		cout<<"(0)SALIR"<<endl;
+		cout<<endl;
+		cout<<"ingrese una opcion"<<endl;
+		cin>>op;
+		switch(op)
+		{
+		case 1:
+			{
+			int A[MAX][MAX],fil,col;
+			do{
+			cout<<"introduzca el numero de filas que desea"<<endl;
+			cin>>fil;
+			}while((fil<=0)||(fil>MAX));
+			do{
+			cout<<"introduzca el numero de columnas que desea"<<endl;
+			cin>>col;
+			}while((col<=0)||(col>MAX));
+			cout<<endl;
+			cargar(A,fil,col);
+			cout<<"MATRIZ A"<<endl;
+			mostrar(A,fil,col);
+			cout<<"MATRIZ A TRANSPUESTA"<<endl;
+			transpuesta(A,fil,col);
+			break;
+			}
+		case 2:
+			{
+			int B[MAX][MAX],fil2,col2,A[MAX][MAX],fil,col;
+			do{
+			cout<<"introduzca el numero de filas que desea"<<endl;
+			cin>>fil;
+			}while((fil<=0)||(fil>MAX));
+			do{
+			cout<<"introduzca el numero de columnas que desea"<<endl;
+			cin>>col;
+			}while((col<=0)||(col>MAX));
+			cout<<endl;
+			cargar(A,fil,col);
+			cout<<"MATRIZ A"<<endl;
+			mostrar(A,fil,col);
+			cout<<endl;
+			cout<<"ingrese la otra matriz"<<endl;
+			do{
+			cout<<"introduzca el numero de filas que desea"<<endl;
+			cin>>fil2;
+			}while((fil2<=0)||(fil2>MAX));
+			do{
+			cout<<"introduzca el numero de columnas que desea"<<endl;
+			cin>>col2;
+			}while((col2<=0)||(col2>MAX));
+			cargar(B,fil2,col2);
+			cout<<"MATRIZ B"<<endl;
+			mostrar(B,fil2,col2);
+			cout<<"SUMA DE DOS MATRICES"<<endl;
+			suma(A,B,fil,col,fil2,col2);
+			break;
+			}
+		case 3:
+			{
+			int B[MAX][MAX],fil2,col2,A[MAX][MAX],fil,col;
+			do{
+			cout<<"introduzca el numero de filas que desea"<<endl;
+			cin>>fil;
+			}while((fil<=0)||(fil>MAX));
+			do{
+			cout<<"introduzca el numero de columnas que desea"<<endl;
+			cin>>col;
+			}while((col<=0)||(col>MAX));
+			cout<<endl;
+			cargar(A,fil,col);
+			cout<<"MATRIZ A"<<endl;
+			mostrar(A,fil,col);
+			cout<<endl;
+			cout<<"ingrese la otra matriz"<<endl;
+			do{
+			cout<<"introduzca el numero de filas que desea"<<endl;
+			cin>>fil2;
+			}while((fil2<=0)||(fil2>MAX));
+			do{
+			cout<<"introduzca el numero de columnas que desea"<<endl;
+			cin>>col2;
+			}while((col2<=0)||(col2>MAX));
+			cargar(B,fil2,col2);
+			cout<<"MATRIZ B"<<endl;
+			mostrar(B,fil2,col2);
+			cout<<"MULTIPLICACION DE DOS MATRICES"<<endl;
+			multiplicacion(A,B,fil,col,fil2,col2);
+			break;
+			}
+		case 4:
+			{int A[MAX][MAX],fil,col;
+			do{
+			cout<<"introduzca el numero de filas que desea"<<endl;
+			cin>>fil;
+			}while((fil<=0)||(fil>MAX));
+			do{
+			cout<<"introduzca el numero de columnas que desea"<<endl;
+			cin>>col;
+			}while((col<=0)||(col>MAX));
+			cout<<endl;
+			if(fil==col)
+			{cargar(A,fil,col);
+			cout<<endl;
+			cout<<"MATRIZ A"<<endl;
+			mostrar(A,fil,col);
+			cout<<endl;
+			magica(A,fil,col);
+			}
+			else
+				cout<<"la matriz debe ser cuadrada"<<endl;
+			break;
+			}
+		case 5:
+			{
+			int A[MAX][MAX],orden,i,cont,d;
+			d=1;
+			cont=0;
+			do{
+			cout<<"introduzca el orden de la matriz"<<endl;
+			cin>>orden;
+			}while((orden<=0)||(orden>MAX));
+
+			while(cont<(orden/2))
+			{
+				for(i=cont;i<(orden-cont);i++)
+				{
+					A[cont][i]=d;
+					cout<<"A["<<cont<<"]["<<i<<"]="<<A[cont][i]<<endl;
+					d++;
+				}
+				for(i=cont+1;i<(orden-cont);i++)
+				{
+					A[i][orden-1-cont]=d;
+					cout<<"A["<<i<<"]["<<orden-1-cont<<"]="<<A[i][orden-1-cont]<<endl;
+					d++;
+				}
+				for(i=(orden-2-cont);i>=cont;i--)
+				{
+					A[orden-1-cont][i]=d;
+					cout<<"A["<<orden-1-cont<<"]["<<i<<"]="<<A[orden-1-cont][i]<<endl;
+					d++;
+				}
+				for(i=orden-2-cont;i>cont;i--)
+				{
+					A[i][cont]=d;
+					cout<<"A["<<i<<"]["<<cont<<"]="<<A[i][cont]<<endl;
+					d++;
+				}
+				cont++;
+			}
+			if(orden%2!=0)
+				A[orden/2][orden/2]=orden*orden;
+				cout<<"A["<<orden/2<<"]["<<orden/2<<"]="<<A[orden/2][orden/2]<<endl;
+			break;
+			}
+		case 0:
+			{
+			cout<<"SALIR"<<endl;
+			break;
+			}
+		default:
+			{
+			cout<<"NO ESTA ENTRE LAS OPCIONES"<<endl;
+			break;
+			}
+		}
+	}while(op!=0);
+getch();
+}
+
+void cargar(int A[MAX][MAX], int fil, int col)
+{
+	for(int i=0;i<fil;i++)
+		for(int j=0;j<col;j++)
+			{	
+				cout<<"A["<<i<<"]["<<j<<"]=";
+				cin>>A[i][j];
+			}		
+}
+void mostrar(int A[MAX][MAX], int fil, int col)
+{
+	for(int i=0;i<fil;i++)
+	{	for(int j=0;j<col;j++)
+		{
+			cout<<A[i][j]<<"\t";
+		}
+		cout<<endl;
+	}
+}
+
+void transpuesta(int A[MAX][MAX], int fil, int col)
+{
+	int i,j,col1,fil1,B[MAX][MAX];
+	fil1=col;
+	col1=fil;
+	for(i=0;i<fil1;i++)
+	{	for(j=0;j<col1;j++)
+		{
+			B[i][j]=A[j][i];
+			cout<<B[i][j]<<"\t";
+		}
+		cout<<endl;
+	}
+}
+
+void suma(int A[MAX][MAX],int B[MAX][MAX],int fil, int col,int fil2, int col2)
+{
+	int i,j,C[MAX][MAX];
+	if((fil==fil2)&&(col==col2))
+	{	for(i=0;i<fil;i++)
+		{	for(j=0;j<col;j++)
+			{
+				C[i][j]=A[i][j]+B[i][j];
+				cout<<C[i][j]<<"\t";
+			}
+			cout<<endl;
+		}
+	}
+	else
+		cout<<"no se pueden sumar matrices de distintos tamanhos"<<endl;
+}
+void multiplicacion(int A[MAX][MAX],int B[MAX][MAX],int fil, int col,int fil2, int col2)
+{
+	int C[MAX][MAX],fil3,col3,i,j,k,x;
+	x=col=fil2;
+	if(col==fil2)
+	{
+		fil3=fil;
+		col3=col2;
+
+		for(i=0;i<fil3;i++)
+		{
+			for(j=0;j<col3;j++)
+			{
+				C[i][j]=0;
+				for(k=0;k<x;k++)
+				{
+					C[i][j]=C[i][j]+((A[i][k])*(B[k][j]));
+				}
+
+			}
+		}
+		mostrar(C,fil3,col3);
+	}
+	else
+		cout<<"no se puede realizar la multiplicacion, error en el tamanho"<<endl;
+}
+void magica(int A[MAX][MAX], int fil, int col)
+{
+	int orden,i,j,C[MAX],n,cont,aux,k,r;
+	aux=0;
+	cont=0;		
+	orden=fil=col;
+	for(i=0;i<orden;i++)
+	{
+		for(j=0;j<orden;j++)		
+		{
+			aux=aux+A[i][j];
+		}
+		C[cont]=aux;
+		cont++;
+		aux=0;
+	}
+	for(j=0;j<orden;j++)
+	{
+		for(i=0;i<orden;i++)
+		{
+			aux=aux+A[i][j];
+		}
+		C[cont]=aux;
+		cont++;
+		aux=0;
+	}
+	for(i=0;i<orden;i++)
+	{
+		for(j=0;j<orden;j++)
+		{
+			if(i==j)
+			{
+				aux=aux+A[i][j];
+			}
+		}
+	}
+	C[cont]=aux;
+	cont++;	
+	aux=0;
+	for(i=0;i<orden;i++)
+	{	
+		for(j=0;j<orden;j++)
+		{
+			if((i+j)==(orden-1))	
+			{
+				aux=aux+A[i][j];
+			}
+		}
+
+	}
+	C[cont]=aux;
+	cont++;
+	aux=0;
+	r=0;
+	for(k=0;k<(cont-1);k++)
+	{
+		if(C[k]!=C[k+1])
+		{
+			r=1;
+		}
+	}
+	if(r==1)
+		cout<<"LA MATRIZ NO ES MAGICA"<<endl;
+	else
+		cout<<"LA MATRIZ ES MAGICA"<<endl;
+
+}
