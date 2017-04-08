@@ -38,14 +38,19 @@ void cargar_mostrar_matriz(int fil, int col, int A[MAX][MAX])
 		}
 }
 void transpuesta(int fil, int col, int A[MAX][MAX])
-{	int i,j,col1,fil1;
+{	int i,j,col1,fil1,B[MAX][MAX];
 	fil1=col;
 	col1=fil;
 	cout<<endl;
 	cout<<"MATRIZ TRANSPUESTA"<<endl;
 	cout<<endl;
 	for(i=0;i<fil1;i++)
-		for(j=0;j<col1;j++)
-			cout<<"A["<<i<<"]["<<j<<"]="<<A[j][i]<<endl;
+	{	for(j=0;j<col1;j++)
+		{
+			B[i][j]=A[j][i];
+			cout<<B[i][j]<<"\t";
+		}
+		cout<<endl;
+	}
 	
 }
