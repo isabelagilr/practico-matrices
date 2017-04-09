@@ -1,4 +1,4 @@
-// menu de series de matrices.cpp : Defines the entry point for the console application.
+// series mat.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -7,6 +7,7 @@
 #define MAX 20
 
 using namespace std;
+int sumadigitos(int num);
 
 void main()
 {
@@ -95,8 +96,72 @@ void main()
 			break;
 			}
 		case 3:
+			{
+			int dig,suma,d,num;
+			suma=0;
+			num=1;
+			do{
+				cout<<"ingrese la cantidad de filas de la matriz"<<endl;
+				cin>>fil;
+			}while((fil<=0)||(fil>MAX));
+			do{
+				cout<<"ingrese la cantidad de columnas de la matriz"<<endl;
+				cin>>col;
+			}while((col<=0)||(col>MAX));
+			cout<<endl;
+			cout<<"LA MATRIZ ES:"<<endl;
+			for(i=0;i<fil;i++)
 			{	
-			
+				for(j=0;j<col;j++)
+				{
+					if((i==0)&&(j==0))
+					{
+						A[i][j]=1;
+						cout<<A[i][j]<<"\t";
+					}
+					else
+					{
+						d=sumadigitos(num);
+						suma=suma+d;
+						A[i][j]=suma;
+						num=suma;
+						d=0;
+						cout<<A[i][j]<<"\t";
+					}
+				}
+				cout<<endl;
+			}
+			break;
+			}
+		case 4:
+			{
+			int dig,suma,d,num;
+			suma=0;
+			num=1;
+			do{
+				cout<<"ingrese la cantidad de filas de la matriz"<<endl;
+				cin>>fil;
+			}while((fil<=0)||(fil>MAX));
+			do{
+				cout<<"ingrese la cantidad de columnas de la matriz"<<endl;
+				cin>>col;
+			}while((col<=0)||(col>MAX));
+			cout<<endl;
+			cout<<"LA MATRIZ ES:"<<endl;
+			for(i=0;i<fil;i++)
+			{	
+				for(j=0;j<col;j++)
+				{
+					
+						d=sumadigitos(num);
+						suma=suma+d;
+						A[i][j]=d;
+						num=suma;
+						d=0;
+						cout<<A[i][j]<<"\t";
+				}
+				cout<<endl;
+			}
 			break;
 			}
 		case 0:
@@ -112,4 +177,16 @@ void main()
 		}
 	}while(op!=0);
 	getch();
+}
+
+int sumadigitos(int num)
+{
+	int sd,d;
+	sd=0;
+	do{
+		d=num%10;
+		sd=sd+d;
+		num=num/10;
+	}while(num>0);
+	return(sd);
 }
