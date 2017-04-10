@@ -1,0 +1,53 @@
+// paises.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+#define max 10
+
+using namespace std;
+void cargar_diagonales(int A[max][max], int n);
+	
+
+void main()
+{
+	int n,A[max][max];
+
+	cout<<"ingrese el orden"<<endl;
+	cin>>n;
+	cout<<"MATRIZ"<<endl;
+	cargar_diagonales(A,n);
+	getch();
+}
+
+void cargar_diagonales(int A[max][max], int n)
+{
+	int cont,j,i,d;
+	d=1;
+	cont=0;
+	for(cont=0;cont<(n*2)-1;cont++)
+	{
+		for(i=0;i<n;i++)
+		{	for(j=0;j<n;j++)
+			{
+				if((i+j)==cont)
+				{
+					A[i][j]=d;
+					d++;
+				}
+				
+			}
+		}	
+	}
+
+	for(i=0;i<n;i++)
+	{	for(j=0;j<n;j++)
+		{	
+			cout<<A[i][j]<<"\t";
+		}
+		cout<<endl;
+	}
+	
+}
